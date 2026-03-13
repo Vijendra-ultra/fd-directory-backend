@@ -1,3 +1,4 @@
+const pool = require("../config/pool");
 const getAllFds = async () => {
   const res = await pool.query(
     `SELECT * FROM fixed_deposits ORDER BY created_at LIMIT 100`,
@@ -16,7 +17,7 @@ const getFdsByRating = async (orderBy) => {
 };
 const addRating = async (id, rating) => {
   const res = await pool.query(
-    `UPDATE fixed_deposits SET rating=$1  WHERE id=$2`,
+    `UPDATE fixed_deposits SET ratings=$1  WHERE id=$2`,
     [rating, id],
   );
   return res.rows;

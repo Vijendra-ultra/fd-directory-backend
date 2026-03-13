@@ -1,7 +1,7 @@
 const fds = require("../services/fds.services");
 const getAllFds = async (req, res, next) => {
   try {
-    const fds = await fd.getAllFds();
+    const fds = await fds.getAllFds();
     res.status(200).json({ count: fds.length, data: fds });
   } catch (err) {
     next(err);
