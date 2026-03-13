@@ -5,13 +5,20 @@ const getAllFds = async () => {
   return res.rows;
 };
 const getFdsByID = async (id) => {
-  const res = pool.query(`SELECT * FROM fixed_deposits where id=$1`, id);
+  const res = await pool.query(`SELECT * FROM fixed_deposits where id=$1`, id);
   return res.rows[0];
 };
 const getFdsByRating = async (orderBy) => {
-  const res = pool.query(
-    `SELECT * FROM fixed_deposits ORDER BY ratings LIMIT 100`,
+  const res = await pool.query(
+    `SELECT * FROM fixed_deposits ORDER BY ratings ${orderBy} LIMIT 100`,
   );
   return res.rows;
 };
-module.exports = { getAllFds, getFdsByID, getFdsByRating };
+const addRating = async (id, rating) => {
+  const res = await pool.query(
+    `UPDATE fixed_deposits SET rating=$1  WHERE id=$2`,
+    [rating, id],
+  );
+  return res.rows;
+};
+module.exports = { getAllFds, getFdsByID, getFdsByRating, addRating };
