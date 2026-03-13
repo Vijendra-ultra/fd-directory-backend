@@ -6,7 +6,9 @@ const getAllFds = async () => {
   return res.rows;
 };
 const getFdsByID = async (id) => {
-  const res = await pool.query(`SELECT * FROM fixed_deposits where id=$1`, id);
+  const res = await pool.query(`SELECT * FROM fixed_deposits where id=$1`, [
+    id,
+  ]);
   return res.rows[0];
 };
 const getFdsByRating = async (orderBy) => {
@@ -20,6 +22,6 @@ const addRating = async (id, rating) => {
     `UPDATE fixed_deposits SET ratings=$1  WHERE id=$2`,
     [rating, id],
   );
-  return res.rows;
+  return res;
 };
 module.exports = { getAllFds, getFdsByID, getFdsByRating, addRating };

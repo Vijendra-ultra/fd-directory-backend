@@ -1,6 +1,6 @@
-const Pool = require("pg");
+const { Pool } = require("pg");
 const config = require("./config");
-export const pool = new pool({
+const pool = new Pool({
   host: "localhost",
   port: 5432,
   user: "app_user",
@@ -8,3 +8,4 @@ export const pool = new pool({
   database: "app_db",
   ssl: false,
 });
+module.exports = pool;

@@ -1,7 +1,7 @@
-const fds = require("../services/fds.services");
+const fdService = require("../services/fds.services");
 const getAllFds = async (req, res, next) => {
   try {
-    const fds = await fds.getAllFds();
+    const fds = await fdService.getAllFds();
     res.status(200).json({ count: fds.length, data: fds });
   } catch (err) {
     next(err);
@@ -10,7 +10,7 @@ const getAllFds = async (req, res, next) => {
 
 const getFdsById = async (req, res, next) => {
   try {
-    const fd = await fds.getFdsByID();
+    const fd = await fdService.getFdsByID();
     return res.status(200).json({ data: fd });
   } catch (err) {
     next(err);
@@ -20,7 +20,7 @@ const getFdsByRating = async (req, res, next) => {
   try {
     const { orderby = "desc" } = req.params;
 
-    const data = await fds.getFdsByRating(orderby);
+    const data = await fdService.getFdsByRating(orderby);
     res.status(200).json({ count: data.length, data: data });
   } catch (err) {
     next(err);
@@ -33,8 +33,8 @@ const addRating = async (req, res, next) => {
     if (!rating || rating < 1 || rating > 10) {
       res.status(400).json({ message: "Rating must be between 1 and 10" });
     }
-    const res = await fd.addRating(id, rating);
-    if (res.rowsCount === 0) {
+    const res = await fdService.addRating(id, rating);
+    if (res.rowCount === 0) {
       res.status(404).json({ message: "Fixed deposits doesn't exist" });
     }
     res.status(200).json({ message: "Ratings added successfully." });
