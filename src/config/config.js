@@ -1,7 +1,8 @@
 const dotenv = require("dotenv");
 dotenv.config();
 
-export const config = {
-  port: process.env.PORT,
+const config = {
+  port: process.env.PORT || 3000,
   dbPassword: process.env.DBPASSWORD,
 };
+module.exports = config;

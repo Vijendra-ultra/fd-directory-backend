@@ -14,7 +14,7 @@ app.use(express.json());
 app.use("/api/v1/fd", fdsRouteHandler);
 
 app.get((req, res) => {
-  res.status(404).json({ message: "Unknow request" });
+  res.status(404).json({ message: "Unknown request" });
 });
 app.use(erroHandler);
 module.exports = app;

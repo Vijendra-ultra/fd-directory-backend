@@ -3,6 +3,7 @@ const {
   getAllFds,
   getFdsById,
   getFdsByRating,
+  addRating,
 } = require("../controllers/fd.controller");
 const router = Router();
 
