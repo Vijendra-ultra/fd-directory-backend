@@ -10,7 +10,7 @@ const getAllFds = async (req, res, next) => {
 
 const getFdsById = async (req, res, next) => {
   try {
-    const fd = await fdService.getFdsByID();
+    const fd = await fdService.getFdsByID(req.params.id);
     return res.status(200).json({ data: fd });
   } catch (err) {
     next(err);
