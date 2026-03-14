@@ -9,6 +9,9 @@ const getFdsByID = async (id) => {
   const res = await pool.query(`SELECT * FROM fixed_deposits where id=$1`, [
     id,
   ]);
+  if (res.rows.length === 0) {
+    return "FD_NOT_FOUND";
+  }
   return res.rows[0];
 };
 const getFdsByRating = async (orderBy) => {

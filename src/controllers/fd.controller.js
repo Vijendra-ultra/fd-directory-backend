@@ -11,7 +11,10 @@ const getAllFds = async (req, res, next) => {
 const getFdsById = async (req, res, next) => {
   try {
     const fd = await fdService.getFdsByID(req.params.id);
-    return res.status(200).json({ data: fd });
+    if (fd === "FD_NOT_FOUND") {
+      return res.status(404).json({ ok: false, message: "Fd not found" });
+    }
+    return res.status(200).json({ ok: true, data: fd });
   } catch (err) {
     next(err);
   }
