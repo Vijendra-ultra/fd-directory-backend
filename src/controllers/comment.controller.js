@@ -26,7 +26,7 @@ const addComment = async (req, res, next) => {
 };
 const getComments = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const id = req.params.id;
 
     const data = await commentService.getComments(id);
     if (data.rows.length > 0) {

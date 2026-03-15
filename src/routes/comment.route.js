@@ -5,5 +5,5 @@ const {
 } = require("../controllers/comment.controller");
 const router = Router();
 router.post("/addComment", addComment);
-router.post("/:id", getComments);
+router.get("/:id", getComments);
 module.exports = router;
