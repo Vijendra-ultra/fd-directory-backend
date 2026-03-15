@@ -1,4 +1,11 @@
 const pool = require("../config/pool");
+const addFd = async (name, description, colours) => {
+  const res = await pool.query(
+    `INSERT INTO fixed_deposits(name,description,rating,colours) VALUES($1,$2,0,$3)`,
+    [name, description, colours.split(",")],
+  );
+  return res;
+};
 const getAllFds = async () => {
   const res = await pool.query(
     `SELECT * FROM fixed_deposits ORDER BY created_at LIMIT 100`,
@@ -27,4 +34,4 @@ const addRating = async (id, rating) => {
   );
   return res;
 };
-module.exports = { getAllFds, getFdsByID, getFdsByRating, addRating };
+module.exports = { addFd, getAllFds, getFdsByID, getFdsByRating, addRating };

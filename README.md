@@ -4,7 +4,7 @@ Tables are as below
 
 **fixed_deposits**
 ------------------------------------
-|| id | name | rating | created_at ||
+|| id | name | rating | description | colours | created_at ||
 ------------------------------------
 
 **user_reviews**

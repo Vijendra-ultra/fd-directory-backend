@@ -1,4 +1,40 @@
 const fdService = require("../services/fds.services");
+const addFd = async (req, res, next) => {
+  try {
+    const hexColorRegex = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/;
+    const { name, description, colours } = req.body;
+    const colourArr = colours.split(",");
+    if (!name || !description || !colours)
+      return res.status(400).json({ success: false, message: "Broken data" });
+    if (
+      name.length > 20 ||
+      description.length > 400 ||
+      colours.split(",").length > 3
+    ) {
+      return res
+        .status(400)
+        .json({ success: false, message: "The data is too long or broken." });
+    }
+    for (let i = 0; i < 3; i++) {
+      if (!hexColorRegex.test(colourArr[i])) {
+        return res
+          .status(400)
+          .json({ success: false, message: "Invalid colour code." });
+      }
+    }
+    const response = await fdService.addFd(name, description, colours);
+    if (response.rowCount === 1) {
+      return res
+        .status(201)
+        .json({ success: true, message: "Fd is successfully inserted." });
+    }
+    return res
+      .status(500)
+      .json({ success: false, message: "Failed to add fd." });
+  } catch (err) {
+    next(err);
+  }
+};
 const getAllFds = async (req, res, next) => {
   try {
     const fds = await fdService.getAllFds();
@@ -45,4 +81,4 @@ const addRating = async (req, res, next) => {
     next(err);
   }
 };
-module.exports = { getAllFds, getFdsById, getFdsByRating, addRating };
+module.exports = { addFd, getAllFds, getFdsById, getFdsByRating, addRating };

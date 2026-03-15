@@ -6,7 +6,7 @@ const addComment = async (req, res, next) => {
       !user_name ||
       !comment ||
       user_name.length > 20 ||
-      comment.length > 200 ||
+      comment.length > 500 ||
       !fd_id
     ) {
       return res
@@ -15,7 +15,7 @@ const addComment = async (req, res, next) => {
     }
     const response = await commentService.addComment(user_name, comment, fd_id);
     if (response.rowCount === 1) {
-      return res.status(201).json({ success: true, data: res?.rows[0] });
+      return res.status(201).json({ success: true, data: response?.rows[0] });
     }
     return res
       .status(500)
