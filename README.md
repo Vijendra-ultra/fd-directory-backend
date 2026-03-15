@@ -1,9 +1,13 @@
-Main table: fixed_deposits
+This project uses postgres database (I have hosted postgreSQL in my own VPS). 
+
+Tables are as below
 
 **fixed_deposits**
 ------------------------------------
 || id | name | rating | created_at ||
 ------------------------------------
 
-This project uses postgres database (I have hosted postgreSQL in my own VPS). 
-
+**user_reviews**
+-------------------------------------------------
+|| id | user_name | comment | fd_id| created_at ||
+-------------------------------------------------

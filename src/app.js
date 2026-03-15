@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const fdsRouteHandler = require("../src/routes/fd.routes");
+const commentsRouteHandler = require("./routes/comment.route");
 const erroHandler = require("./middlewares/errorHandler");
 const app = express();
 app.use(
@@ -12,7 +13,7 @@ app.use(
 );
 app.use(express.json());
 app.use("/api/v1/fd", fdsRouteHandler);
-
+app.use("/api/v1/comments", commentsRouteHandler);
 app.get((req, res) => {
   res.status(404).json({ message: "Unknown request" });
 });
