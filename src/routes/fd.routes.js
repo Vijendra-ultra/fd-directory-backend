@@ -12,5 +12,5 @@ router.get("/", getAllFds);
 router.get("/:id", getFdsById);
 router.get("/getByRating", getFdsByRating);
 router.post("/:id/postRating", addRating);
-route.post("/addFd", addFd);
+router.post("/addFd", addFd);
 module.exports = router;
